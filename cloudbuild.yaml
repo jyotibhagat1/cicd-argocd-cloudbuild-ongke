@@ -29,7 +29,7 @@ steps:
     git config --global user.email "jyotibhagat114@gmail.com"
     git add -A
     git commit -m "[Cloud Builder] Updated image tag us-central1-docker.pkg.dev/$PROJECT_ID/myrepo/newrepo:$SHORT_SHA from commit ${COMMIT_SHA}"
-    git push https://jyotibhagat1:$$GIT_ACCESS_TOKEN@github.com/jyotibhagat1/2ndrepo.git main
+    git push https://github.com/jyotibhagat1/2ndrepo.git main
     
 availableSecrets:
   secretManager:
