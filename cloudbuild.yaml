@@ -1,7 +1,7 @@
 #### Building Docker Image ####
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'asia-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPO}/myapp:$SHORT_SHA', '-t', 'asia-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPO}/myapp:${_IMAGE_TAG}', '.' ]
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/priyankaproject-365917/myrepo', '-t', 'us-central1-docker.pkg.dev/priyankaproject-365917/myrepo:${_IMAGE_TAG}', '.' ]
 
 #### Pushing Docker Image ####
 - name: 'gcr.io/cloud-builders/docker'
@@ -9,8 +9,8 @@ steps:
   args: 
   - -c
   - |
-    docker push asia-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPO}/myapp:$SHORT_SHA
-    docker push asia-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPO}/myapp:${_IMAGE_TAG}
+    docker push us-central1-docker.pkg.dev/priyankaproject-365917/myrepo:$SHORT_SHA
+    docker push us-central1-docker.pkg.dev/priyankaproject-365917/myrepo:${_IMAGE_TAG}
 
 # This step generates the new manifest
 - name: 'gcr.io/cloud-builders/gcloud'
@@ -19,7 +19,7 @@ steps:
   args:
   - '-c'
   - |
-    git clone https://jyotibhagat1:$$GIT_ACCESS_TOKEN@github.com/jyotibhagat1/2ndrepo.git -b ${_CD_BRANCH}
+    git clone https://jyotibhagat1:$$GIT_ACCESS_TOKEN@github.com/jyotibhagat1/2ndrepo.git -b main
     echo "Updating image tag version ..."
     cd 2ndrepo
     sed "s/GOOGLE_CLOUD_PROJECT/$PROJECT_ID/g" deployment.yaml | \
@@ -29,7 +29,7 @@ steps:
     git config --global user.email "jyotibhagat114@gmail.com"
     git add -A
     git commit -m "[Cloud Builder] Updated image tag asia-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPO}/myapp:$SHORT_SHA from commit ${COMMIT_SHA}"
-    git push https://jyotibhagat1:$$GIT_ACCESS_TOKEN@github.com/<your-github-id>/2ndrepo.git ${_CD_BRANCH}
+    git push https://jyotibhagat1:$$GIT_ACCESS_TOKEN@github.com/<your-github-id>/2ndrepo.git main
     
 availableSecrets:
   secretManager:
