@@ -19,13 +19,13 @@ steps:
   args:
   - '-c'
   - |
-    git clone https://jyotibhagat1:$$GIT_ACCESS_TOKEN@github.com/jyotibhagat1/2ndrepo.git -b main
+    git clone https://github.com/jyotibhagat1/2ndrepo.git -b main
     echo "Updating image tag version ..."
     cd 2ndrepo
     sed "s/GOOGLE_CLOUD_PROJECT/$PROJECT_ID/g" deployment.yaml.tpl | \
     sed "s/COMMIT_SHA/${SHORT_SHA}/g" > deployment.yaml
     echo "Pushing changes to k8s manifest repo "
-    git config --global user.name "jyoti"
+    git config --global user.name "jyotibhagat1"
     git config --global user.email "jyotibhagat114@gmail.com"
     git add -A
     git commit -m "[Cloud Builder] Updated image tag us-central1-docker.pkg.dev/$PROJECT_ID/myrepo/newrepo:$SHORT_SHA from commit ${COMMIT_SHA}"
