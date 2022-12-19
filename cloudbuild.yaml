@@ -15,7 +15,7 @@ steps:
 # This step generates the new manifest
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
-  secretEnv: ['github-access-token']
+  secretEnv: ['GIT_ACCESS_TOKEN']
   args:
   - '-c'
   - |
