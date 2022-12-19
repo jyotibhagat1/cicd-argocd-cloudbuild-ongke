@@ -1,7 +1,7 @@
 #### Building Docker Image ####
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/myrepo', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/myrepo:${_IMAGE_TAG}', '.' ]
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/myrepo:$SHORT_SHA', '.' ]
 
 #### Pushing Docker Image ####
 - name: 'gcr.io/cloud-builders/docker'
@@ -10,7 +10,7 @@ steps:
   - -c
   - |
     docker push us-central1-docker.pkg.dev/$PROJECT_ID/myrepo:$SHORT_SHA
-    docker push us-central1-docker.pkg.dev/$PROJECT_ID/myrepo:${_IMAGE_TAG}
+   
 
 # This step generates the new manifest
 - name: 'gcr.io/cloud-builders/gcloud'
