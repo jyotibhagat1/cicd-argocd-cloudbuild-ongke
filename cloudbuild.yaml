@@ -15,7 +15,7 @@ steps:
 # This step generates the new manifest
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
-  secretEnv: ['GIT_ACCESS_TOKEN']
+  secretEnv: ['github-access-token']
   args:
   - '-c'
   - |
@@ -29,7 +29,7 @@ steps:
     git config --global user.email "jyotibhagat114@gmail.com"
     git add -A
     git commit -m "[Cloud Builder] Updated image tag us-central1-docker.pkg.dev/$PROJECT_ID/myrepo/newrepo:$SHORT_SHA from commit ${COMMIT_SHA}"
-    git push https://jyotibhagat1:$$GIT_ACCESS_TOKEN@https://github.com/jyotibhagat1/2ndrepo.git -b main
+    git push https://jyotibhagat1:$$GIT_ACCESS_TOKEN@https://github.com/jyotibhagat1/2ndrepo.git main
     
 availableSecrets:
   secretManager:
