@@ -1,10 +1,10 @@
 #### Building Docker Image ####
 steps:
-- name: 'gcr.io/cloud-builders/docker'
+- name: 'gcr.io/cloud-builders/docker1'
   args: [ 'build', '-t', 'us-central1-docker.pkg.dev/valued-geode-345108/myrepo/newimg:$SHORT_SHA', '.' ]
 
 #### Pushing Docker Image ####
-- name: 'gcr.io/cloud-builders/docker'
+- name: 'gcr.io/cloud-builders/docker1'
   entrypoint: /bin/sh
   args: 
   - -c
