@@ -20,7 +20,7 @@ steps:
   - '-c'
   - |
     git clone https://jyotibhagat1:$$GIT_ACCESS_TOKEN@https://github.com/jyotibhagat1/2ndrepo.git -b main
-    echo "Updating image tag version ..."
+    echo "Updating image tag version .........."
     cd 2ndrepo
     sed "s/GOOGLE_CLOUD_PROJECT/$PROJECT_ID/g" deployment.yaml.tpl | \
     sed "s/COMMIT_SHA/${SHORT_SHA}/g" > deployment.yaml
