@@ -1,7 +1,7 @@
 #### Building Docker Image ####
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/myrepo/newrepo:$SHORT_SHA', '.' ]
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/valued-geode-345108/myrepo/newrepo:$SHORT_SHA', '.' ]
 
 #### Pushing Docker Image ####
 - name: 'gcr.io/cloud-builders/docker'
@@ -9,7 +9,7 @@ steps:
   args: 
   - -c
   - |
-    docker push us-central1-docker.pkg.dev/$PROJECT_ID/myrepo/newrepo:$SHORT_SHA
+    docker push us-central1-docker.pkg.dev/valued-geode-345108/myrepo/newrepo:$SHORT_SHA
    
 
 # This step generates the new manifest
@@ -28,7 +28,7 @@ steps:
     git config --global user.name "jyotibhagat1"
     git config --global user.email "jyotibhagat114@gmail.com"
     git add -A
-    git commit -m "[Cloud Builder] Updated image tag us-central1-docker.pkg.dev/$PROJECT_ID/myrepo/newrepo:$SHORT_SHA from commit ${COMMIT_SHA}"
+    git commit -m "[Cloud Builder] Updated image tag us-central1-docker.pkg.dev/valued-geode-345108/myrepo/newrepo:$SHORT_SHA from commit ${COMMIT_SHA}"
     git push https://jyotibhagat1:$$GIT_ACCESS_TOKEN@https://github.com/jyotibhagat1/2ndrepo.git main
     
 availableSecrets:
