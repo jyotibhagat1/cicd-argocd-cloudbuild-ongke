@@ -10,7 +10,6 @@ steps:
   - -c
   - |
     docker push us-central1-docker.pkg.dev/valued-geode-345108/myrepo:$SHORT_SHA
-   
 
 # This step generates the new manifest
 - name: 'gcr.io/cloud-builders/gcloud'
@@ -19,22 +18,22 @@ steps:
   args:
   - '-c'
   - |
-    git clone https://jyotibhagat1:$$GIT_ACCESS_TOKEN@https://github.com/jyotibhagat1/2ndrepo.git -b main
-    echo "Updating image tag version .........."
+    git clone https://github.com/jyotibhagat1/2ndrepo.git -b main
+    echo "Updating image tag version ..."
     cd 2ndrepo
     sed "s/GOOGLE_CLOUD_PROJECT/$PROJECT_ID/g" deployment.yaml.tpl | \
     sed "s/COMMIT_SHA/${SHORT_SHA}/g" > deployment.yaml
-    echo "Pushing changes to k8s manifest repo "
+    echo "Pushing changes to k8s manifest repo ..."
     git config --global user.name "jyotibhagat1"
     git config --global user.email "jyotibhagat114@gmail.com"
     git add -A
     git commit -m "[Cloud Builder] Updated image tag us-central1-docker.pkg.dev/valued-geode-345108/myrepo:$SHORT_SHA from commit ${COMMIT_SHA}"
-    git push https://jyotibhagat1:$$GIT_ACCESS_TOKEN@https://github.com/jyotibhagat1/2ndrepo.git main
+    git push https://jyotibhagat1:$$GIT_ACCESS_TOKEN@github.com/jyotibhagat1/2ndrepo.git main
     
 availableSecrets:
   secretManager:
   - versionName: projects/$PROJECT_NUMBER/secrets/github-access-token/versions/latest
     env: 'GIT_ACCESS_TOKEN'
 
-options:
-  logging: CLOUD_LOGGING_ONLY
+# # options:
+# #   logging: CLOUD_LOGGING_ONLY
